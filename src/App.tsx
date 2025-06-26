@@ -1,34 +1,41 @@
-
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
 
-
+import { AppSidebar } from "@/components/app-sidebar"
+import { ChartAreaInteractive } from "@/components/chart-area-interactive"
+import { DataTable } from "@/components/data-table"
+import { SectionCards } from "@/components/section-cards"
+import { SiteHeader } from "@/components/site-header"
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar"
+import data from "./data.json"
+export default function Page() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <h1> hola  rama nueva </h1>
-      </div>
-
-      <div className="card">
- 
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">
+          <div className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+              <SectionCards />
+              <div className="px-4 lg:px-6">
+                <ChartAreaInteractive />
+              </div>
+              <DataTable data={data} />
+            </div>
+          </div>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
-
-export default App
